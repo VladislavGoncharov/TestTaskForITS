@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/style/style.css}"/>
+
+    <title>Title</title>
+</head>
+<body>
+<a  class="a_main"  th:href="@{/}">Главная</a>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td colspan="2">
+            Квадрат
+        </td>
+        <td>
+        </td>
+        <td colspan="2" th:text="${semiMagicSquare.originalSemiMagicSquare}">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Превращается в
+        </td>
+        <td></td>
+        <td colspan="2" th:text="${semiMagicSquare.semiMagicSquareString}">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            За минимальную стоимость
+        </td>
+        <td></td>
+        <td colspan="2" th:text="${semiMagicSquare.lowestCost}"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Размер квадрата
+        </td>
+        <td></td>
+        <td colspan="2" th:text="${semiMagicSquare.sideSize + 'x' + semiMagicSquare.sideSize}"></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <form th:action="@{/save-semi-magic-square}" th:object="${semiMagicSquare}" method="get">
+                <input type="hidden" th:field="*{originalSemiMagicSquare}">
+                <input type="hidden" th:field="*{semiMagicSquareString}">
+                <input type="hidden" th:field="*{lowestCost}">
+                <input type="hidden" th:field="*{sideSize}">
+                <input type="submit" value="Сохранить в базу данных"/>
+            </form>
+        </td>
+        <td></td>
+        <td  colspan="2">
+        <form th:action="@{/downland-file-semi-magic-square}" th:object="${semiMagicSquare}" method="get">
+
+                <input type="hidden" th:field="*{originalSemiMagicSquare}">
+                <input type="hidden" th:field="*{semiMagicSquareString}">
+                <input type="hidden" th:field="*{lowestCost}">
+                <input type="hidden" th:field="*{sideSize}">
+                <input type="submit" value="Скачать SemiMagicSquare.txt"/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table class="mini_table">
+                <tr>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(0,1)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(2,3)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(4,5)}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(6,7)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(8,9)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(10,11)}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(12,13)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(14,15)}"></td>
+                    <td th:text="${semiMagicSquare.semiMagicSquareString.substring(16,17)}"></td>
+                </tr>
+            </table>
+        </td>
+
+    <td>
+        <strong>
+            ➔
+        </strong>
+    </td>
+    <td colspan="2">
+        <table class="mini_table">
+                <tr>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(0,1)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(2,3)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(4,5)}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(6,7)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(8,9)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(10,11)}"></td>
+                </tr>
+                <tr>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(12,13)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(14,15)}"></td>
+                    <td th:text="${semiMagicSquare.originalSemiMagicSquare.substring(16,17)}"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,118 @@
+#database_is_search_substring, #database_is_semi_magic_square, #formIsSearchSubstring {
+    display: none;
+}
+html {
+    background: linear-gradient(130deg, #78a0e4, #b67fff70);
+    padding: 20px;
+    height: 1vh;
+}
+
+a, button, select, input, .label_file {
+    border: 2px grey solid;
+    background: linear-gradient(130deg, #b5bcf2, #e5dcf6);
+    margin: 5px;
+    padding: 10px 25px;
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    transition-duration: 0.5s;
+}
+
+a:hover, .a_main:hover, button:hover, select:hover, input:hover, .label_file:hover {
+    box-shadow: -2px -2px 5px whitesmoke, -2px 2px 5px whitesmoke, 2px -2px 5px whitesmoke, 2px 2px 5px whitesmoke;
+}
+
+input[type=file] {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.a_main {
+    border: 2px grey solid;
+    text-decoration: none;
+    background: linear-gradient(130deg, #b5bcf2, #e5dcf6);
+    margin: 50px;
+    padding: 20px 50px;
+    font-size: 30px;
+    border-radius: 20px;
+    color: black;
+    display: table-cell;
+}
+
+table {
+    margin: auto;
+    background: #a298ff;
+    border: 1px solid grey;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    text-align: center
+}
+
+td {
+    padding: 10px;
+    font-size: x-large;
+}
+
+.mini_table {
+    border-radius: 0;
+    font-size: 30px;
+    margin: auto;
+}
+
+.mini_table td {
+    height: 30px;
+    width: 30px;
+    border: outset;
+
+}
+
+strong {
+    font-size: 50px;
+}
+
+.no_border {
+    border: none;
+}
+
+.error {
+    border: 2px red dashed;
+    border-radius: 15px;
+    padding: 15px;
+    background: #ff00001a;
+    white-space: break-spaces;
+}
+
+.database_style {
+    width: fit-content;
+}
+
+.database_style td, a {
+    width: fit-content;
+    line-height: 25px;
+    font-size: 17px;
+    padding: 5px;
+}
+
+thead td {
+    font-size: 20px;
+    border-bottom: 2px solid black;
+}
+
+.label_file {
+    font-family: sans-serif;
+}
+
+#file-chosen{
+    margin-left: 0.3rem;
+    font-family: sans-serif;
+}
+
+.manual{
+    border: 2px #2c2c2c dashed;
+    border-radius: 15px;
+    background: #00d0ff1a;
+    padding: 0;
+    font-size: 20px;
+}

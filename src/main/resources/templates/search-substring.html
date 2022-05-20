@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/style/style.css}"/>
+
+    <title>Search substring</title>
+</head>
+<body>
+<a  class="a_main"  th:href="@{/}">Главная</a>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td>
+            Список подстрок:
+        </td>
+        <td th:text="${searchSubstring.firstArrayString}">
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Текст где проводился поиск подстрок:
+        </td>
+        <td th:text="${searchSubstring.secondArrayString}"></td>
+    </tr>
+    <tr>
+        <td>
+            Список найденных подстрок:
+        </td>
+        <td th:text="${searchSubstring.resultArrayString}"></td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{/save-search-substring}" th:object="${searchSubstring}" method="get">
+                <input type="hidden" th:field="*{firstArrayString}">
+                <input type="hidden" th:field="*{secondArrayString}">
+                <input type="hidden" th:field="*{resultArrayString}">
+                <input type="submit" value="Сохранить в базу данных"/>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/downland-file-search-substring}" th:object="${searchSubstring}" method="get">
+                <input type="hidden" th:field="*{firstArrayString}">
+                <input type="hidden" th:field="*{secondArrayString}">
+                <input type="hidden" th:field="*{resultArrayString}">
+                <input type="submit" value="Скачать SearchSubstring.txt"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

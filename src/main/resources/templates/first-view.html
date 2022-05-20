@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/style/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/style/style.css}"/>
+
+    <title>Главная</title>
+
+</head>
+<body>
+
+<a class="a_main" th:href="@{/}">Главная</a>
+<table>
+    <tbody>
+    <tr>
+        <td th:if="${not #strings.isEmpty(error)}">
+            <p class="error" th:text="${error}"></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <label>
+                Выберите задачу
+                <select id="task_selection">
+                    <option selected>Полу магический квадрат</option>
+                    <option>Поиск подстрок</option>
+                </select>
+            </label>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="formIsSemiMagicSquare">
+                <form th:action="@{/semi-magic-square}" th:object="${semiMagicSquare}" method="get">
+                    <table class="no_border">
+                        <tr>
+                            <td class="manual" colspan="2">
+                                Инструкция:<br/> введите цифры от 1 до 9 включительно,<br/> цифры не должны повторяться.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <label> Введите квадрат
+                                    <input id="input_semi_magic_square" type="text"
+                                           th:field="*{originalSemiMagicSquare}"
+                                            placeholder="4,6,2,3,8,1,9,5,7">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table class="mini_table" id="table">
+                                    <tr>
+                                        <td id="cell_№1"></td>
+                                        <td id="cell_№2"></td>
+                                        <td id="cell_№3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="cell_№4"></td>
+                                        <td id="cell_№5"></td>
+                                        <td id="cell_№6"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="cell_№7"></td>
+                                        <td id="cell_№8"></td>
+                                        <td id="cell_№9"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="reset" value="Очистить"/>
+                            </td>
+                            <td>
+                                <input type="submit" value="Найти"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div>
+                    <form th:action="@{/upload-semi-magic-square}" method="post" enctype="multipart/form-data">
+                        <table class="no_border">
+                            <tr>
+                                <td class="td_with_upload_file_square">
+                                    <label for="file_input_1" class="label_file">Выберите файл</label>
+                                    <span id="file_chosen_1">Файл не выбран</span>
+                                    <input id="file_input_1" type="file" th:name="file"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_with_upload_file_square" >
+                                    <input type="submit" value="Загрузить файл"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <button onclick="db_switch_semi_magic_square()">Загрузить из БД</button>
+
+
+            </div>
+            <div id="formIsSearchSubstring">
+                <form th:action="@{/search-substring}" th:object="${searchSubstring}" method="get">
+                    <table class="no_border">
+                        <tr>
+                            <td class="manual" colspan="2">
+                                Инструкция:<br/> Если подстрочек более 2-х,<br/> то вводить необходимо через пробел.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="input_search_substring_1"> Введите искомые слова </label>
+                            </td>
+                            <td>
+                                <input id="input_search_substring_1" type="text" th:field="*{firstArrayString}"
+                                placeholder="го чул пог">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="input_search_substring_2"> Введите где искать искомые слова</label>
+                            </td>
+                            <td>
+                                <input id="input_search_substring_2" type="text" th:field="*{secondArrayString}"
+                                       placeholder="погон чулок сапог">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="reset" value="Очистить"/>
+                            </td>
+                            <td>
+                                <input type="submit" value="Найти"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div>
+                    <form th:action="@{/upload-search-substring}" method="post" enctype="multipart/form-data">
+                        <table class="no_border">
+                            <tr>
+                                <td class="td_with_upload_file_substring" >
+                                    <label for="file_input_2" class="label_file">Выберите файл</label>
+                                    <span id="file_chosen_2">Файл не выбран</span>
+                                    <input id="file_input_2" type="file" th:name="file"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td_with_upload_file_substring">
+                                    <input type="submit" value="Загрузить файл"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <button onclick="db_switch_search_substring()">Загрузить из БД</button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="database_style" id="database_is_semi_magic_square">
+    <thead>
+    <tr>
+        <td>Оригинальный квадрат</td>
+        <td>Преобразованный квадрат</td>
+        <td>Минимальная стоимость</td>
+        <td>Размер квадрата</td>
+        <td>Дата добавления</td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <!--/*@thymesVar id="entity" type="com.vladislavgoncharov.testtaskforits.entity.EntitySemiMagicSquare"*/-->
+    <tr th:each="entity : ${listSemiMagicSquare}">
+        <td th:text="${entity.getORIGINAL_SQUARE()}">
+        </td>
+        <td th:text="${entity.getNEW_SEMI_MAGIC_SQUARE()}">
+        </td>
+        <td th:text="${entity.getLOWEST_COST()}">
+        </td>
+        <td th:text="${entity.getSIZE_SIDE()}">
+        </td>
+        <td th:text="${entity.getDATE_OF_RECORDING()}">
+        </td>
+        <td>
+            <a th:href="@{/semi-magic-square(originalSemiMagicSquare=${entity.getORIGINAL_SQUARE()})}">
+                Загрузить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="database_style" id="database_is_search_substring">
+    <thead>
+    <tr>
+        <td>Искомые подстроки</td>
+        <td>Текст для поиска подстрок</td>
+        <td>Найденные подстроки</td>
+        <td>Дата добавления</td>
+    </tr>
+    </thead>
+    <!--/*@thymesVar id="entity" type="com.vladislavgoncharov.testtaskforits.entity.EntitySearchSubstring"*/-->
+    <tr th:each="entity : ${listSearchSubstring}">
+        <td th:text="${entity.getFIRST_ARRAY()}">
+        </td>
+        <td th:text="${entity.getSECOND_ARRAY()}">
+        </td>
+        <td th:text="${entity.getRESULT()}">
+        </td>
+        <td th:text="${entity.getDATE_OF_RECORDING()}">
+        </td>
+        <td>
+            <a th:href="@{/search-substring(firstArrayString=${entity.getFIRST_ARRAY()},secondArrayString=${entity.getSECOND_ARRAY()})}">Загрузить</a>
+        </td>
+    </tr>
+</table>
+
+
+<script type="text/javascript" th:src="@{/js/dynamic_options.js}"></script>
+<script type="text/javascript" th:src="@{/js/input_semi_magic_square.js}"></script>
+
+</body>
+</html>
