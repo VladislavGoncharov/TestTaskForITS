@@ -30,29 +30,29 @@ public class ControllerForSearchSubstring {
     @GetMapping("/search-substring")
     public String searchSubstring(@ModelAttribute("searchSubstring") SearchSubstring searchSubstring, Model model) {
 
-        try{
+        try {
             searchSubstring.getResult();
-            if (searchSubstring.getFirstArrayString().isEmpty() ||
-            searchSubstring.getSecondArrayString().isEmpty()) throw new NullPointerException();
-        } catch (Exception e){
-            return firstViewController.firstView(model,"Не было найдено ни одной подстроки,\n попробуйте еще раз");
+            if (searchSubstring.getFirstArrayString().isEmpty() || searchSubstring.getSecondArrayString().isEmpty())
+                throw new NullPointerException();
+        } catch (Exception e) {
+            return firstViewController.firstView(model, "Не было найдено ни одной подстроки,\n попробуйте еще раз");
         }
 
         return "search-substring";
     }
 
     @RequestMapping("/save-search-substring")
-    public String saveProgramForSearchSubstring(@ModelAttribute("searchSubstring") SearchSubstring searchSubstring, Model model) {
+    public String saveProgramForSearchSubstring(@ModelAttribute("searchSubstring") SearchSubstring searchSubstring,
+                                                Model model) {
 
         programService.saveSearchSubstring(
-                searchSubstring.getFirstArrayString(),
-                searchSubstring.getSecondArrayString(),
-                searchSubstring.getResultArrayString());
-
+                        searchSubstring.getFirstArrayString(),
+                        searchSubstring.getSecondArrayString(),
+                        searchSubstring.getResultArrayString());
         model.addAttribute("searchSubstring", searchSubstring);
+
         return "search-substring";
     }
-
 
     @PostMapping("/upload-search-substring")
     public String uploadSearchSubstring(@RequestParam("file") MultipartFile file, Model model) {
@@ -68,9 +68,8 @@ public class ControllerForSearchSubstring {
             searchSubstring.getResult();
 
         } catch (Exception e) {
-            return firstViewController.firstView(model,"Ошибка загрузки/чтения файла");
+            return firstViewController.firstView(model, "Ошибка загрузки/чтения файла");
         }
-
         model.addAttribute("searchSubstring", searchSubstring);
 
         return "search-substring";
@@ -79,35 +78,34 @@ public class ControllerForSearchSubstring {
     @GetMapping("/downland-file-search-substring")
     public void downlandFileSearchSubstring(@ModelAttribute("searchSubstring") SearchSubstring searchSubstring,
                                             HttpServletResponse response) {
+
         File file = new File("SearchSubstring.txt");
 
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))){
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write("\t\tSearch substring\n");
             bufferedWriter.write(searchSubstring.getFirstArrayString() + "\n");
             bufferedWriter.write("\t\t//----------//\n");
             bufferedWriter.write(searchSubstring.getSecondArrayString() + "\n");
             bufferedWriter.write("\t//------------/------------//\n");
             bufferedWriter.write(searchSubstring.getResultArrayString());
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         response.setHeader("Content-Disposition", "attachment; filename=SearchSubstring.txt");
         response.setContentType("application/octet-stream");
 
-        try(BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-            ServletOutputStream outputStream = response.getOutputStream()){
+        try (BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+             ServletOutputStream outputStream = response.getOutputStream()) {
 
             byte[] buffer = new byte[8192];
             int byteRead = -1;
-
             while ((byteRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, byteRead);
             }
-        }catch (IOException e){
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

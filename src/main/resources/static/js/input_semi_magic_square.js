@@ -47,29 +47,31 @@ let arrayCell = [
     document.getElementById("cell_№9"),
 ]
 let sizeInput2 = input.value.length;
-
+////////////////////////////////////////////////////////////////////////
 // Работа с визуальным квадратом
 input.addEventListener("input", function () {
 
     let numberCurrentCell = (input.value.length / 2) - 1;
     let isDelete = sizeInput2 > input.value.length;
-    let currentValue = input.value.substring(input.value.length-2,input.value.length-1);
+    let currentValue = input.value.substring(input.value.length - 2, input.value.length - 1);
 
     // Добавление последней цифры в квадрат
-    if (input.value.length===17 && !isDelete){
-        arrayCell[8].innerText = input.value.substring(input.value.length-1);
+    if (input.value.length === 17 && !isDelete) {
+        arrayCell[8].innerText = input.value.substring(input.value.length - 1);
         sizeInput2 = input.value.length;
     }// Удаление последней цифры из квадрата
-    else if (sizeInput2===17 && isDelete){
+    else if (sizeInput2 === 17 && isDelete) {
         arrayCell[8].innerText = "";
         sizeInput2 = input.value.length;
     }// Добавление цифр в квадрат
-    else if (!isDelete){
+    else if (!isDelete) {
         arrayCell[numberCurrentCell].innerText = currentValue;
         sizeInput2 = input.value.length;
     }// Удаление цифр из квадрата
     else {
-        arrayCell[numberCurrentCell+1].innerText = "";
+        arrayCell[numberCurrentCell + 1].innerText = "";
         sizeInput2 = input.value.length;
     }
 })
+////////////////////////////////////////////////////////////////////////
+

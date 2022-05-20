@@ -1,6 +1,7 @@
 #database_is_search_substring, #database_is_semi_magic_square, #formIsSearchSubstring {
     display: none;
 }
+
 html {
     background: linear-gradient(130deg, #78a0e4, #b67fff70);
     padding: 20px;
@@ -8,14 +9,16 @@ html {
 }
 
 a, button, select, input, .label_file {
-    border: 2px grey solid;
+    color: black;
     background: linear-gradient(130deg, #b5bcf2, #e5dcf6);
+    font-size: 20px;
+    text-decoration: none;
+
     margin: 5px;
     padding: 10px 25px;
-    font-size: 20px;
+
+    border: 2px grey solid;
     border-radius: 10px;
-    text-decoration: none;
-    color: black;
     transition-duration: 0.5s;
 }
 
@@ -30,24 +33,28 @@ input[type=file] {
 }
 
 .a_main {
-    border: 2px grey solid;
-    text-decoration: none;
-    background: linear-gradient(130deg, #b5bcf2, #e5dcf6);
-    margin: 50px;
-    padding: 20px 50px;
-    font-size: 30px;
-    border-radius: 20px;
     color: black;
+    background: linear-gradient(130deg, #b5bcf2, #e5dcf6);
+    font-size: 30px;
+    text-decoration: none;
+
+    padding: 20px 50px;
+    margin: 50px;
     display: table-cell;
+
+    border: 2px grey solid;
+    border-radius: 20px;
 }
 
 table {
-    margin: auto;
     background: #a298ff;
+    text-align: center;
+
+    margin: auto;
+
     border: 1px solid grey;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    text-align: center
 }
 
 td {
@@ -56,9 +63,9 @@ td {
 }
 
 .mini_table {
-    border-radius: 0;
     font-size: 30px;
     margin: auto;
+    border-radius: 0;
 }
 
 .mini_table td {
@@ -77,11 +84,13 @@ strong {
 }
 
 .error {
+    background: #ff00001a;
+    padding: 15px;
+    margin: 0;
+
     border: 2px red dashed;
     border-radius: 15px;
-    padding: 15px;
-    background: #ff00001a;
-    white-space: break-spaces;
+    white-space: normal;
 }
 
 .database_style {
@@ -89,10 +98,10 @@ strong {
 }
 
 .database_style td, a {
-    width: fit-content;
-    line-height: 25px;
     font-size: 17px;
     padding: 5px;
+    width: fit-content;
+    line-height: 25px;
 }
 
 thead td {
@@ -104,15 +113,16 @@ thead td {
     font-family: sans-serif;
 }
 
-#file-chosen{
-    margin-left: 0.3rem;
+#file-chosen {
+    margin-left: 15px;
     font-family: sans-serif;
 }
 
-.manual{
+.manual {
+    background: #00d0ff1a;
+    font-size: 20px;
+    padding: 0;
+
     border: 2px #2c2c2c dashed;
     border-radius: 15px;
-    background: #00d0ff1a;
-    padding: 0;
-    font-size: 20px;
 }

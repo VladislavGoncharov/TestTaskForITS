@@ -8,7 +8,7 @@ public class SemiMagicSquare {
     private String originalSemiMagicSquare;
 
     private Integer[] semiMagicSquare;
-    private String semiMagicSquareString;
+    private String newSemiMagicSquare;
     private int lowestCost;
 
     private int sideSize = 3;
@@ -21,35 +21,36 @@ public class SemiMagicSquare {
     public SemiMagicSquare() {
     }
 
-    public SemiMagicSquare(StringBuilder originalSemiMagicSquare, StringBuilder semiMagicSquareString,
-                           StringBuilder lowestCost, StringBuilder sideSize) {
+    public SemiMagicSquare(StringBuilder originalSemiMagicSquare,
+                           StringBuilder semiMagicSquareString,
+                           StringBuilder lowestCost,
+                           StringBuilder sideSize) {
 
         this.originalSemiMagicSquare = String.valueOf(originalSemiMagicSquare);
-        this.semiMagicSquareString = String.valueOf(semiMagicSquareString);
+        this.newSemiMagicSquare = String.valueOf(semiMagicSquareString);
         this.lowestCost = Integer.parseInt(String.valueOf(lowestCost));
         this.sideSize = Integer.parseInt(String.valueOf(sideSize));
     }
 
     public void getResult() throws Exception {
-
         sumSideSize = (sideSize * ((int) Math.pow(sideSize, 2) + 1)) / 2;
         semiMagicSquare = convertStringToArray();
 
         generateAllPossibleOptions(semiMagicSquare.length, new LinkedList<>());
-
         calculateLowestCost();
 
         for (Map.Entry<Integer, Integer[]> array : map.entrySet()) {
+            // Берем самый первый вариант, ведь он наименьший
             lowestCost = array.getKey();
-            semiMagicSquareString = Arrays.stream(array.getValue())
+            newSemiMagicSquare = Arrays.stream(array.getValue())
                     .mapToInt(integer -> integer)
                     .mapToObj(integer -> integer + "")
                     .reduce((accum, str) -> accum + "," + str).get();
             break;
         }
-
     }
 
+    // Генерируем все возможные варианты
     private void generateAllPossibleOptions(int sizeArray, Deque<Integer> listNumbersUsed) {
         if (listNumbersUsed.size() == sizeArray) {
             checkingSidesOfSquare(listNumbersUsed.toArray(new Integer[0]));
@@ -70,13 +71,14 @@ public class SemiMagicSquare {
                 .collect(Collectors.toList());
 
         Object[] arrayForChecking = futureArray.stream().sorted().toArray();
-
+        // Проверка на правильность ввода цифр (от 1 по порядку до размера стороны в квадрате)
         if (!((int) arrayForChecking[0] == 1 && (int) arrayForChecking[arrayForChecking.length - 1] == Math.pow(sideSize, 2)))
             throw new Exception("Неверно введенные данные");
 
         return futureArray.toArray(new Integer[0]);
     }
 
+    // Проверка на полу магический квадрат, в случае удачной проверки добавляем в лист
     private void checkingSidesOfSquare(Integer[] currentArray) {
 
         for (int i = 0; i < Math.pow(sideSize, 2); i += 3) {
@@ -104,6 +106,7 @@ public class SemiMagicSquare {
         listSemiMagicSquare.add(currentArray);
     }
 
+    // Проверка стоимость всех квадратов от исходного
     private void calculateLowestCost() {
         lowestCost = 100;
         for (Integer[] currentArray : listSemiMagicSquare) {
@@ -120,16 +123,16 @@ public class SemiMagicSquare {
         }
     }
 
+    // Создаем квадрат на основе данных из файла
     public static SemiMagicSquare createObjectFromFile(List<String> futureObjectFromFile) throws Exception {
         StringBuilder originalSemiMagicSquare = new StringBuilder(),
-                newSemiMagicSquare = new StringBuilder(),
-                lowestCost = new StringBuilder(),
-                sideSize = new StringBuilder();
+                         newSemiMagicSquare = new StringBuilder(),
+                             lowestCost = new StringBuilder(),
+                                  sideSize = new StringBuilder();
 
         int switchArrays = 0;
 
         for (String line : futureObjectFromFile) {
-
             if ("Semi magic square".equals(line.trim()) ||
                     "//----------//".equals(line.trim()) ||
                     "//------------/------------//".equals(line.trim())) {
@@ -142,12 +145,10 @@ public class SemiMagicSquare {
             else if (switchArrays == 3) lowestCost.append(line);
             else sideSize.append(line.charAt(0));
         }
-
         if (switchArrays <= 3) throw new Exception("File error");
 
         return new SemiMagicSquare(originalSemiMagicSquare, newSemiMagicSquare, lowestCost, sideSize);
     }
-
 
     public String getOriginalSemiMagicSquare() {
         return originalSemiMagicSquare;
@@ -205,12 +206,12 @@ public class SemiMagicSquare {
         this.map = map;
     }
 
-    public String getSemiMagicSquareString() {
-        return semiMagicSquareString;
+    public String getNewSemiMagicSquare() {
+        return newSemiMagicSquare;
     }
 
-    public void setSemiMagicSquareString(String semiMagicSquareString) {
-        this.semiMagicSquareString = semiMagicSquareString;
+    public void setNewSemiMagicSquare(String newSemiMagicSquare) {
+        this.newSemiMagicSquare = newSemiMagicSquare;
     }
 
     public int getLowestCost() {
@@ -219,21 +220,6 @@ public class SemiMagicSquare {
 
     public void setLowestCost(int lowestCost) {
         this.lowestCost = lowestCost;
-    }
-
-    @Override
-    public String toString() {
-        return "SemiMagicSquare{" +
-                "++++ futureSemiMagicSquare='" + originalSemiMagicSquare + '\'' +
-                ", semiMagicSquare=" + Arrays.toString(semiMagicSquare) +
-                "++++, semiMagicSquareString='" + semiMagicSquareString + '\'' +
-                "++++, lowestCost=" + lowestCost +
-                "++++, sideSize=" + sideSize +
-                ", sumSideSize=" + sumSideSize +
-                ", countSemiMagicSquare=" + countSemiMagicSquare +
-                ", listSemiMagicSquare=" + listSemiMagicSquare +
-                ", map=" + map +
-                '}';
     }
 }
 

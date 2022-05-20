@@ -28,9 +28,7 @@ public class EntitySemiMagicSquare {
         this.NEW_SEMI_MAGIC_SQUARE = NEW_SEMI_MAGIC_SQUARE;
         this.LOWEST_COST = LOWEST_COST;
         this.SIZE_SIDE = SIZE_SIDE;
-        this.DATE_OF_RECORDING = DateTimeFormatter
-                .ofPattern("dd.MM.yyyy HH:mm")
-                .format(LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        this.DATE_OF_RECORDING = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(LocalDateTime.now().atZone(ZoneId.systemDefault()));
 
     }
 

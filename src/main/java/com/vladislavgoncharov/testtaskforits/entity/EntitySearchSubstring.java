@@ -25,9 +25,7 @@ public class EntitySearchSubstring {
         this.FIRST_ARRAY = FIRST_ARRAY;
         this.SECOND_ARRAY = SECOND_ARRAY;
         this.RESULT = RESULT;
-        this.DATE_OF_RECORDING = DateTimeFormatter
-                .ofPattern("dd.MM.yyyy HH:mm")
-                .format(LocalDateTime.now().atZone(ZoneId.systemDefault()));
+        this.DATE_OF_RECORDING = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").format(LocalDateTime.now().atZone(ZoneId.systemDefault()));
     }
 
     public int getID() {

@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/style/style.css"/>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/style/style.css}"/>
-
     <title>Главная</title>
-
 </head>
 <body>
 
 <a class="a_main" th:href="@{/}">Главная</a>
+<br>
 <table>
     <tbody>
     <tr>
@@ -47,7 +45,7 @@
                                 <label> Введите квадрат
                                     <input id="input_semi_magic_square" type="text"
                                            th:field="*{originalSemiMagicSquare}"
-                                            placeholder="4,6,2,3,8,1,9,5,7">
+                                           placeholder="4,6,2,3,8,1,9,5,7">
                                 </label>
                             </td>
                         </tr>
@@ -93,7 +91,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="td_with_upload_file_square" >
+                                <td class="td_with_upload_file_square">
                                     <input type="submit" value="Загрузить файл"/>
                                 </td>
                             </tr>
@@ -101,8 +99,6 @@
                     </form>
                 </div>
                 <button onclick="db_switch_semi_magic_square()">Загрузить из БД</button>
-
-
             </div>
             <div id="formIsSearchSubstring">
                 <form th:action="@{/search-substring}" th:object="${searchSubstring}" method="get">
@@ -118,7 +114,7 @@
                             </td>
                             <td>
                                 <input id="input_search_substring_1" type="text" th:field="*{firstArrayString}"
-                                placeholder="го чул пог">
+                                       placeholder="го чул пог">
                             </td>
                         </tr>
                         <tr>
@@ -144,7 +140,7 @@
                     <form th:action="@{/upload-search-substring}" method="post" enctype="multipart/form-data">
                         <table class="no_border">
                             <tr>
-                                <td class="td_with_upload_file_substring" >
+                                <td class="td_with_upload_file_substring">
                                     <label for="file_input_2" class="label_file">Выберите файл</label>
                                     <span id="file_chosen_2">Файл не выбран</span>
                                     <input id="file_input_2" type="file" th:name="file"/>
@@ -219,7 +215,6 @@
         </td>
     </tr>
 </table>
-
 
 <script type="text/javascript" th:src="@{/js/dynamic_options.js}"></script>
 <script type="text/javascript" th:src="@{/js/input_semi_magic_square.js}"></script>

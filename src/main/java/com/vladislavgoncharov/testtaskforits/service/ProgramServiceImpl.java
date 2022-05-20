@@ -1,7 +1,7 @@
 package com.vladislavgoncharov.testtaskforits.service;
 
-import com.vladislavgoncharov.testtaskforits.entity.EntitySemiMagicSquare;
 import com.vladislavgoncharov.testtaskforits.entity.EntitySearchSubstring;
+import com.vladislavgoncharov.testtaskforits.entity.EntitySemiMagicSquare;
 import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,6 @@ public class ProgramServiceImpl implements ProgramService {
 
         Session session = entityManager.unwrap(Session.class);
         session.save(new EntitySearchSubstring(firstArrays, secondArrays, result));
-
     }
 
     @Override
@@ -37,8 +36,7 @@ public class ProgramServiceImpl implements ProgramService {
     public List<?> getAllEntityObject(Class<?> entityClass) {
 
         Session session = entityManager.unwrap(Session.class);
-        List<?> allEntities
-                = session.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
+        List<?> allEntities = session.createQuery("from " + entityClass.getSimpleName(), entityClass).getResultList();
         Collections.reverse(allEntities);
         return allEntities;
     }
